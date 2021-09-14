@@ -1,0 +1,33 @@
+{
+  "name": "vloop/entities",
+  "description": "Package",
+  "type": "yii2-extension",
+  "keywords": [
+    "yii2",
+    "problems",
+    "module",
+    "tasks"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vitaly Litvinov",
+      "email": "support@tirrs.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "vloop\\entities\\": "src"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
+}
