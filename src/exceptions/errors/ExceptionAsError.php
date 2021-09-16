@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vloop\entities\exceprions\errors;
+namespace vloop\entities\exceptions\errors;
 
 
 use vloop\entities\contracts\Entities;
