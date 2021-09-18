@@ -8,7 +8,7 @@ use vloop\entities\contracts\ExceptionsOfEntities;
 /**
  * Позволяет перехватить список ошибок в любом месте программы.
 */
-class NotValidatedFieldsException extends \Exception implements ExceptionsOfEntities
+class NotValidatedFields extends \Exception implements ExceptionsOfEntities
 {
     private $errors;
 
