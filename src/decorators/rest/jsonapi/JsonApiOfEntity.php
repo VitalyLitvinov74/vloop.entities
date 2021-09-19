@@ -4,12 +4,12 @@
 namespace vloop\entities\decorators\rest\jsonapi;
 
 
-use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
 
 class JsonApiOfEntity implements Entity
 {
+
     private $origin;
     private $originType;
     private $needleFields;
@@ -32,11 +32,9 @@ class JsonApiOfEntity implements Entity
     public function printYourself(): array
     {
         return [
-            'data' => [
-                "type" => $this->originType,
-                "id" => $this->id(),
-                "attributes" => $this->attributes()
-            ]
+            "type" => $this->originType,
+            "id" => $this->id(),
+            "attributes" => $this->attributes()
         ];
     }
 

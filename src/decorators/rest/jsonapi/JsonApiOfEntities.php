@@ -1,6 +1,8 @@
 <?php
 
+
 namespace vloop\entities\decorators\rest\jsonapi;
+
 
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
@@ -25,9 +27,7 @@ class JsonApiOfEntities implements Entities
     public function list(): array
     {
 
-        return [
-            'data' => $this->simpleList()
-        ];
+        return $this->simpleList();
     }
 
     private function simpleList(): array
@@ -40,7 +40,7 @@ class JsonApiOfEntities implements Entities
         $originList = $this->origin->list();
         foreach ($originList as $item) {
             $jsonEntity = $this->jsonEntity($item);
-            $simple[] = $jsonEntity->printYourself()['data'];
+            $simple[] = $jsonEntity->printYourself();
         }
         $given = true;
         return $simple;

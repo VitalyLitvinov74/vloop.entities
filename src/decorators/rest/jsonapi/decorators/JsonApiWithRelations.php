@@ -12,8 +12,8 @@ namespace vloop\entities\decorators\rest\jsonapi\decorators;
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
-use vloop\entities\decorators\rest\jsonapi\JsonApiOfEntities;
-use vloop\entities\decorators\rest\jsonapi\JsonApiOfEntity;
+use vloop\entities\decorators\rest\jsonapi\EntitiesInDataField;
+use vloop\entities\decorators\rest\jsonapi\EntityInDataField;
 //TODO без входных данныех нельзя разрабатывать данный класс. нужно к нему вернуться
 //TODO когд будет реализован основной функционал добавления данных.
 class JsonApiWithRelations implements Entities
@@ -24,7 +24,7 @@ class JsonApiWithRelations implements Entities
     /**
      * JsonApiEntitiesWithRelations constructor.
      * @param Entities $origin
-     * @param JsonApiOfEntities[] $relations
+     * @param EntitiesInDataField[] $relations
      */
     public function __construct(Entities $origin, array $relations)
     {
