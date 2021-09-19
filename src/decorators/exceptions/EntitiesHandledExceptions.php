@@ -1,27 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vitaly
- * Date: 19.09.2021
- * Time: 12:57
- */
 
-namespace vloop\entities\decorators\rest\jsonapi\decorators;
+
+namespace vloop\entities\decorators\exceptions;
 
 
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
+use vloop\entities\decorators\rest\jsonapi\decorators\EntityInErrorsField;
 use vloop\entities\exceptions\errors\NestedArrayAsEntity;
 use vloop\entities\exceptions\NotFoundEntity;
 use vloop\entities\exceptions\NotSavedData;
 use vloop\entities\exceptions\NotValidatedFields;
 
-/**
- * Проверяет выполнение кода на ошибки,
- * если ошибки есть возвращает их в подготовленном формате для REST
- */
-class JsonApiOfEntitiesWithErrors implements Entities
+class EntitiesHandledExceptions implements Entities
 {
     private $origin;
 
@@ -82,7 +74,7 @@ class JsonApiOfEntitiesWithErrors implements Entities
     }
 
     private function errorsAsEntity(array $errors){
-        return new JsonApiOfEntityWithErrors( //оборачивает сущность в поле Errors
+        return new EntityInErrorsField( //оборачивает сущность в поле Errors
             new NestedArrayAsEntity($errors) //Вложенный массив в виде сущности.
         );
     }

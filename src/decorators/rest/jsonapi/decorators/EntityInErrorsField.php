@@ -10,13 +10,15 @@ use vloop\entities\contracts\Form;
 
 class EntityInErrorsField implements Entity
 {
-    public function __construct() {
+    private $origin;
 
+    public function __construct(Entity $origin) {
+        $this->origin = $origin;
     }
 
     public function id(): int
     {
-        // TODO: Implement id() method.
+        return $this->origin->id();
     }
 
     /**
@@ -24,7 +26,9 @@ class EntityInErrorsField implements Entity
      */
     public function printYourself(): array
     {
-        // TODO: Implement printYourself() method.
+        return [
+            'errors'=>$this->origin->printYourself()
+        ];
     }
 
     /**
@@ -33,7 +37,8 @@ class EntityInErrorsField implements Entity
      */
     public function changeLineData(Form $form): Entity
     {
-        // TODO: Implement changeLineData() method.
+        $this->origin->changeLineData($form);
+        return $this;
     }
 
     /**
@@ -41,6 +46,6 @@ class EntityInErrorsField implements Entity
      */
     public function remove(): void
     {
-        // TODO: Implement remove() method.
+        $this->origin->remove();
     }
 }

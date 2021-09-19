@@ -1,19 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vitaly
- * Date: 19.09.2021
- * Time: 13:18
- */
-
-namespace vloop\entities\decorators\rest\jsonapi\decorators;
 
 
+namespace vloop\entities\decorators\exceptions;
+
+
+use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
 
-class JsonApiOfEntityWithErrors implements Entity
+/**
+ * Сущность, с обработанными ошибками.
+ * Class EntityHandledExceptions
+ * @package vloop\entities\decorators\exceptions
+ */
+class EntityHandledExceptions implements Entity
 {
+
     private $origin;
 
     function __construct(Entity $origin)
@@ -31,9 +33,7 @@ class JsonApiOfEntityWithErrors implements Entity
      */
     public function printYourself(): array
     {
-        return [
-            'errors'=>$this->origin->printYourself()
-        ];
+        return $this->origin->printYourself();
     }
 
     /**
