@@ -10,10 +10,15 @@ use vloop\entities\contracts\Form;
 
 class EntityInDataField implements Entity
 {
+    private $origin;
+
+    public function __construct(Entity $origin) {
+        $this->origin = $origin;
+    }
 
     public function id(): int
     {
-        // TODO: Implement id() method.
+        return $this->origin->id();
     }
 
     /**
@@ -21,7 +26,9 @@ class EntityInDataField implements Entity
      */
     public function printYourself(): array
     {
-        // TODO: Implement printYourself() method.
+        return [
+            'data'=>$this->origin->printYourself()
+        ];
     }
 
     /**
@@ -30,7 +37,8 @@ class EntityInDataField implements Entity
      */
     public function changeLineData(Form $form): Entity
     {
-        // TODO: Implement changeLineData() method.
+        $this->origin->changeLineData($form);
+        return $this;
     }
 
     /**
@@ -38,6 +46,6 @@ class EntityInDataField implements Entity
      */
     public function remove(): void
     {
-        // TODO: Implement remove() method.
+        $this->origin->remove();
     }
 }

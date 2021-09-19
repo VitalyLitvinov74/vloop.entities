@@ -8,13 +8,20 @@ use vloop\entities\contracts\Form;
 
 class EntitiesInDataField implements Entities
 {
+    private $origin;
+
+    public function __construct(Entities $origin) {
+        $this->origin = $origin;
+    }
 
     /**
      * @return Entity[] - массив вида [id=>Entity]
      */
     public function list(): array
     {
-        // TODO: Implement list() method.
+        return [
+            'data'=>$this->origin->list()
+        ];
     }
 
     /**
@@ -23,7 +30,9 @@ class EntitiesInDataField implements Entities
      */
     public function add(Form $form): Entity
     {
-        // TODO: Implement add() method.
+        return new EntityInDataField(
+            $this->origin->add($form)
+        );
     }
 
     /**
@@ -32,6 +41,8 @@ class EntitiesInDataField implements Entities
      */
     public function entity(int $id): Entity
     {
-        // TODO: Implement entity() method.
+        return new EntityInDataField(
+            $this->origin->entity($id)
+        );
     }
 }
