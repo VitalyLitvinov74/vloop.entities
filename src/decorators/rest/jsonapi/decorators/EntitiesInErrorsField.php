@@ -10,13 +10,20 @@ use vloop\entities\contracts\Form;
 
 class EntitiesInErrorsField implements Entities
 {
+    private $origin;
+
+    public function __construct(Entities $origin) {
+        $this->origin = $origin;
+    }
 
     /**
      * @return Entity[] - массив вида [id=>Entity]
      */
     public function list(): array
     {
-        // TODO: Implement list() method.
+        return [
+            'errors'=>$this->origin->list()
+        ];
     }
 
     /**
@@ -25,7 +32,9 @@ class EntitiesInErrorsField implements Entities
      */
     public function add(Form $form): Entity
     {
-        // TODO: Implement add() method.
+        return new EntityInErrorsField(
+            $this->origin->add($form)
+        );
     }
 
     /**
@@ -34,6 +43,8 @@ class EntitiesInErrorsField implements Entities
      */
     public function entity(int $id): Entity
     {
-        // TODO: Implement entity() method.
+        return new EntityInErrorsField(
+            $this->origin->entity($id)
+        );
     }
 }
