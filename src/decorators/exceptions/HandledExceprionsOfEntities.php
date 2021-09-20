@@ -13,7 +13,7 @@ use vloop\entities\exceptions\NotFoundEntity;
 use vloop\entities\exceptions\NotSavedData;
 use vloop\entities\exceptions\NotValidatedFields;
 
-class EntitiesHandledExceptions implements Entities
+class HandledExceprionsOfEntities implements Entities
 {
     private $origin;
 
