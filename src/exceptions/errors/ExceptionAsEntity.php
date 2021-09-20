@@ -12,7 +12,7 @@ use vloop\entities\contracts\Form;
  * Class ExceptionAsError - исключение в виде сущности. используется при обработки ошибок.
  * @package vloop\entities\exceprions\errors
  */
-class ExceptionAsError implements Entity
+class ExceptionAsEntity implements Entity
 {
     private $title;
     private $message;

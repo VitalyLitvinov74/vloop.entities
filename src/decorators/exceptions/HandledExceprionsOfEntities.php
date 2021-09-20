@@ -65,7 +65,9 @@ class HandledExceprionsOfEntities implements Entities
         try{
             return $this->origin->entity($id);
         }catch (NotFoundEntity $e){
-
+            return new EntityInErrorsField(
+                new 
+            )
         }catch (NotValidatedFields $e){
             return $this->errorsAsEntity($e->errors());
         }catch (NotSavedData $e){
