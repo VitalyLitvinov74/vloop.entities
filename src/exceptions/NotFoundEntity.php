@@ -5,11 +5,15 @@ namespace vloop\entities\exceptions;
 
 
 use Throwable;
+use vloop\entities\contracts\ExceptionInterface;
 use vloop\entities\contracts\ExceptionsOfEntities;
 
-class NotFoundEntity extends \Exception
+class NotFoundEntity extends AbstractException
 {
-    public function __construct($message) {
-        parent::__construct($message, 404);
+    private $title;
+
+    public function __construct(string $title, string $description) {
+        $this->title = $title;
+        parent::__construct([$title, $description], 404);
     }
 }

@@ -11,7 +11,7 @@ use vloop\entities\contracts\Form;
  * Class NestedArrayAsEntity
  * @package vloop\entities\exceprions\errors
  */
-class NestedArrayAsEntity implements Entity
+class ErrorsAsEntity implements Entity
 {
     private $allErrors;
 

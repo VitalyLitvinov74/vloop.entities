@@ -7,13 +7,12 @@ namespace vloop\entities\decorators\exceptions;
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
-use vloop\entities\decorators\rest\jsonapi\decorators\EntityInErrorsField;
-use vloop\entities\exceptions\errors\NestedArrayAsEntity;
+use vloop\entities\exceptions\errors\ErrorsAsEntity;
 use vloop\entities\exceptions\NotFoundEntity;
 use vloop\entities\exceptions\NotSavedData;
 use vloop\entities\exceptions\NotValidatedFields;
 
-class HandledExceprionsOfEntities implements Entities
+class HandledExceptionsOfEntities implements Entities
 {
     private $origin;
 
@@ -31,13 +30,19 @@ class HandledExceprionsOfEntities implements Entities
             return $this->origin->list();
         }
         catch (NotSavedData $e){
-
+            return $this
+                ->errorsAsEntity($e->errors())
+                ->printYourself();
         }
         catch (NotValidatedFields $e){
-
+            return $this
+                ->errorsAsEntity($e->errors())
+                ->printYourself();
         }
         catch (NotFoundEntity $e){
-
+            return $this
+                ->errorsAsEntity($e->errors())
+                ->printYourself();
         }
     }
 
@@ -48,11 +53,11 @@ class HandledExceprionsOfEntities implements Entities
     public function add(Form $form): Entity
     {
         try{
-
+            return $this->origin->add($form);
         }catch (NotValidatedFields $e){
-
+            return $this->errorsAsEntity($e->errors());
         }catch (NotSavedData $e){
-
+            return $this->errorsAsEntity($e->errors());
         }
     }
 
@@ -65,9 +70,7 @@ class HandledExceprionsOfEntities implements Entities
         try{
             return $this->origin->entity($id);
         }catch (NotFoundEntity $e){
-            return new EntityInErrorsField(
-                new 
-            )
+            return $this->errorsAsEntity($e->errors());
         }catch (NotValidatedFields $e){
             return $this->errorsAsEntity($e->errors());
         }catch (NotSavedData $e){
@@ -76,8 +79,6 @@ class HandledExceprionsOfEntities implements Entities
     }
 
     private function errorsAsEntity(array $errors){
-        return new EntityInErrorsField( //оборачивает сущность в поле Errors
-            new NestedArrayAsEntity($errors) //Вложенный массив в виде сущности.
-        );
+        return new ErrorsAsEntity($errors);
     }
 }

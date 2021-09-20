@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vloop\entities\decorators\exceptions;
+namespace vloop\entities\exceptions\errors;
 
 
 use vloop\entities\contracts\Entities;
@@ -9,23 +9,23 @@ use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
 
 /**
- * Сущность, с обработанными ошибками.
- * Class EntityHandledExceptions
- * @package vloop\entities\decorators\exceptions
+ * Class ExceptionAsError - исключение в виде сущности. используется при обработки ошибок.
+ * @package vloop\entities\exceprions\errors
  */
-class EntityHandledExceptions implements Entity
+class ErrorAsEntity implements Entity
 {
+    private $title;
+    private $message;
 
-    private $origin;
-
-    function __construct(Entity $origin)
-    {
-        $this->origin = $origin;
+    public function __construct(string $title, string $message) {
+        $this->title = $title;
+        $this->message = $message;
     }
+
 
     public function id(): int
     {
-        return $this->origin->id();
+        return 0;
     }
 
     /**
@@ -33,7 +33,10 @@ class EntityHandledExceptions implements Entity
      */
     public function printYourself(): array
     {
-        return $this->origin->printYourself();
+        return [
+            'title'=>$this->title,
+            'message'=>$this->message
+        ];
     }
 
     /**
@@ -42,7 +45,6 @@ class EntityHandledExceptions implements Entity
      */
     public function changeLineData(Form $form): Entity
     {
-        $this->origin->changeLineData($form);
         return $this;
     }
 
@@ -51,6 +53,6 @@ class EntityHandledExceptions implements Entity
      */
     public function remove(): void
     {
-        $this->origin->remove();
+        //not action
     }
 }
