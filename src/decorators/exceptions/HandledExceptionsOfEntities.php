@@ -81,4 +81,12 @@ class HandledExceptionsOfEntities implements Entities
     private function errorsAsEntity(array $errors){
         return new ErrorsAsEntity($errors);
     }
+
+    /**
+     * Реализует паттерн NullObject
+     */
+    public function isNull(): bool
+    {
+        return false; //под вопросом, является ли это место нулевым объектом.
+    }
 }

@@ -53,4 +53,12 @@ class ResetKeysOnListEntities implements Entities
         }
         throw new NotFoundEntity("Сущность не была найдена.");
     }
+
+    /**
+     * Реализует паттерн NullObject
+     */
+    public function isNull(): bool
+    {
+        return false;
+    }
 }

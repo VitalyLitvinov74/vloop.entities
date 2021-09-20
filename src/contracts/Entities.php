@@ -22,4 +22,9 @@ interface Entities
      * @return Entity - конкретная сущность из массив.
      */
     public function entity(int $id): Entity;
+
+    /**
+     * Реализует паттерн NullObject
+    */
+    public function isNull(): bool;
 }

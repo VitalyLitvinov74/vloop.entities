@@ -31,10 +31,19 @@ class JsonApiOfEntity implements Entity
      */
     public function printYourself(): array
     {
+        $origin = $this->origin;
+        if($origin->isNull()){
+            return [
+                'errors'=> $origin->printYourself()
+            ];
+        }
+
         return [
-            "type" => $this->originType,
-            "id" => $this->id(),
-            "attributes" => $this->attributes()
+            'data'=>[
+                "type" => $this->originType,
+                "id" => $this->id(),
+                "attributes" => $this->attributes()
+            ]
         ];
     }
 
@@ -76,5 +85,13 @@ class JsonApiOfEntity implements Entity
     public function remove(): void
     {
         $this->origin->remove();
+    }
+
+    /**
+     * Реализаует паттерн NullObject
+     */
+    public function isNull(): bool
+    {
+        return false;
     }
 }

@@ -23,4 +23,9 @@ interface Entity
      * удаляет себя насовсем.
      */
     public function remove(): void;
+
+    /**
+     * Реализаует паттерн NullObject
+    */
+    public function isNull(): bool;
 }

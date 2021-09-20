@@ -55,4 +55,12 @@ class ErrorAsEntity implements Entity
     {
         //not action
     }
+
+    /**
+     * Реализаует паттерн NullObject
+     */
+    public function isNull(): bool
+    {
+        return true;
+    }
 }

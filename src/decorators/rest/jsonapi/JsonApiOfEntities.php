@@ -76,4 +76,12 @@ class JsonApiOfEntities implements Entities
             $this->needleFields
         );
     }
+
+    /**
+     * Реализует паттерн NullObject
+     */
+    public function isNull(): bool
+    {
+        return false;
+    }
 }
