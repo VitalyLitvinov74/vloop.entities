@@ -11,6 +11,7 @@ use yii\base\Model;
 
 class AbstractForm extends Model implements Form
 {
+    //update tag
     protected $method;
 
     public function __construct($method = 'post', $config = [])
