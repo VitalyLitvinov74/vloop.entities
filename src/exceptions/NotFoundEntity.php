@@ -14,6 +14,6 @@ class NotFoundEntity extends AbstractException
         if(!$title){
             $title = "Not Found Entity";
         }
-        parent::__construct([$title, $description], 404);
+        parent::__construct([$title=>[$description]], 404);
     }
 }

@@ -92,6 +92,6 @@ class JsonApiOfEntity implements Entity
      */
     public function isNull(): bool
     {
-        return false;
+        return $this->origin->isNull();
     }
 }

@@ -7,6 +7,7 @@ namespace vloop\entities\decorators\rest\jsonapi;
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
+use yii\helpers\VarDumper;
 
 class JsonApiOfEntities implements Entities
 {
@@ -26,24 +27,37 @@ class JsonApiOfEntities implements Entities
      */
     public function list(): array
     {
-
-        return $this->simpleList();
-    }
-
-    private function simpleList(): array
-    {
         static $simple = [];
         static $given = false;
         if ($given) {
             return $simple;
         }
-        $originList = $this->origin->list();
+        $originList = $this->origin->list(); //может быть обычным массивом с ошибкой, или массивом сущностей.
+        if (is_object($originList[0])) {
+            $simple = $this->data($originList);
+        } else {
+            $simple = $this->errors($originList);
+        }
+        return $simple;
+    }
+
+    private function errors($originList)
+    {
+        return [
+            'errors' => $originList
+        ];
+    }
+
+    private function data($originList)
+    {
+        $simple = [];
         foreach ($originList as $item) {
             $jsonEntity = $this->jsonEntity($item);
-            $simple[] = $jsonEntity->printYourself();
+            $simple[] = $jsonEntity->printYourself()['data'];
         }
-        $given = true;
-        return $simple;
+        return [
+            'data' => $simple
+        ];
     }
 
     /**

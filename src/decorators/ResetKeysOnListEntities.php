@@ -8,6 +8,7 @@ use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
 use vloop\entities\exceptions\NotFoundEntity;
+use yii\helpers\VarDumper;
 
 /**
  * список сущностей со сброшенным id. в основном используется когда список содержит 1 элемент
