@@ -33,7 +33,7 @@ class JsonApiOfEntities implements Entities
             return $simple;
         }
         $originList = $this->origin->list(); //может быть обычным массивом с ошибкой, или массивом сущностей.
-        if (is_object($originList[0])) {
+        if (is_object($originList[array_key_first($originList)])) {
             $simple = $this->data($originList);
         } else {
             $simple = $this->errors($originList);
