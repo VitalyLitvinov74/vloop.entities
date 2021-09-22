@@ -31,7 +31,7 @@ class CachedEntities implements Entities
         if($searched){
             return $list;
         }
-        $list = $this->list();
+        $list = $this->origin->list();
         $searched = true;
         return $list;
     }
