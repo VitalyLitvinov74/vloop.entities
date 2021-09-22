@@ -4,33 +4,36 @@
 namespace vloop\entities\decorators;
 
 
-use vloop\entities\contracts\Diff;
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
 
 /**
- * пока рано говорить для преобразования декораторов в горизонтальный вид.
- * Class ModifiedToHorizontal
+ * сущности которые закешированы в оп  с помощью возможностей языка
+ * Class CachedEntities
  * @package vloop\entities\decorators
  */
-class ModifiedToHorizontal implements Entities
+class CachedEntities implements Entities
 {
-    private $diff;
     private $origin;
 
-    public function __construct(Entities $origin, Diff $differentObjects) {
+    public function __construct(Entities $origin) {
         $this->origin = $origin;
-        $this->diff = $differentObjects;
     }
-
 
     /**
      * @return Entity[] - массив вида [id=>Entity]
      */
     public function list(): array
     {
-        // TODO: Implement list() method.
+        static $list = [];
+        static $searched = false;
+        if($searched){
+            return $list;
+        }
+        $list = $this->list();
+        $searched = true;
+        return $list;
     }
 
     /**
@@ -39,7 +42,7 @@ class ModifiedToHorizontal implements Entities
      */
     public function add(Form $form): Entity
     {
-        // TODO: Implement add() method.
+        return $this->origin->add($form);
     }
 
     /**
@@ -48,6 +51,14 @@ class ModifiedToHorizontal implements Entities
      */
     public function entity(int $id): Entity
     {
-        // TODO: Implement entity() method.
+        return $this->list()[$id];
+    }
+
+    /**
+     * Реализует паттерн NullObject
+     */
+    public function isNull(): bool
+    {
+        return $this->origin->isNull();
     }
 }
