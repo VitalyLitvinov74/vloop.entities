@@ -26,16 +26,24 @@ class AbstractForm extends Model implements Form
      */
     public function validatedFields(): array
     {
+        static $fields = false;
+        if(is_array($fields)){
+            return $fields;
+        }
         $post = Yii::$app->request->post();
         $get = Yii::$app->request->get();
-        if ($this->method == 'post') {
-            if ($this->load($post, '') and $this->validate()) {
-                return $this->getAttributes();
-            }
-        } elseif ($this->method == 'get') {
-            if ($this->load($get, '') and $this->validate()) {
-                return $this->getAttributes();
-            }
+        if ($this->method == 'post' and $this->load($post, '')) {
+            $this->validatedFields();
+        } elseif ($this->method == 'get' and $this->load($get, '')) {
+            $this->validatedFields();
+        }
+        return [];
+    }
+
+    private function validateFields(){
+        if ($this->validate()) {
+            $fields = $this->getAttributes();
+            return $fields;
         }
         throw new NotValidatedFields($this->getErrors(), 400);
     }
