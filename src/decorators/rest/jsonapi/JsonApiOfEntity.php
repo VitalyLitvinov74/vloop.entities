@@ -6,8 +6,9 @@ namespace vloop\entities\decorators\rest\jsonapi;
 
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
+use vloop\entities\contracts\JsonApiType;
 
-class JsonApiOfEntity implements Entity
+class JsonApiOfEntity implements JsonApiType
 {
 
     private $origin;

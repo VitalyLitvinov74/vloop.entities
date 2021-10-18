@@ -7,9 +7,10 @@ namespace vloop\entities\decorators\rest\jsonapi;
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
+use vloop\entities\contracts\JsonApiTypes;
 use yii\helpers\VarDumper;
 
-class JsonApiOfEntities implements Entities
+class JsonApiOfEntities implements JsonApiTypes
 {
     private $origin;
     private $originType;
