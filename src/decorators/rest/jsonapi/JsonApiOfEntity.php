@@ -10,7 +10,7 @@ use vloop\entities\contracts\JsonApiEntities;
 use vloop\entities\contracts\JsonApiEntity;
 use vloop\entities\contracts\JsonApiTypeOfEntity;
 
-class JsonApiOfEntity implements Entity, JsonApiEntity
+class JsonApiOfEntity implements Entity
 {
 
     private $origin;
