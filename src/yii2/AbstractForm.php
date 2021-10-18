@@ -8,6 +8,7 @@ use vloop\entities\contracts\Form;
 use vloop\entities\exceptions\NotValidatedFields;
 use Yii;
 use yii\base\Model;
+use yii\helpers\VarDumper;
 
 class AbstractForm extends Model implements Form
 {
@@ -30,21 +31,31 @@ class AbstractForm extends Model implements Form
         if(is_array($fields)){
             return $fields;
         }
-        $post = Yii::$app->request->post();
-        $get = Yii::$app->request->get();
-        if ($this->method == 'post' and $this->load($post, '')) {
-            $this->validatedFields();
-        } elseif ($this->method == 'get' and $this->load($get, '')) {
-            $this->validatedFields();
-        }
-        return [];
-    }
-
-    private function validateFields(){
+        $this->loadData();
         if ($this->validate()) {
-            $fields = $this->getAttributes();
+            $fields = $this->unsetNull($this->getAttributes());
             return $fields;
         }
         throw new NotValidatedFields($this->getErrors(), 400);
+    }
+
+    private function loadData(){
+        $post = Yii::$app->request->post();
+        $get = Yii::$app->request->get();
+        if ($this->method == 'post' and $this->load($post, '')) {
+            return true;
+        } elseif ($this->method == 'get' and $this->load($get, '')) {
+            return true;
+        }
+        return false;
+    }
+
+    private function unsetNull(array $fields):array {
+        foreach ($fields as $key=>$field){
+            if(is_null($field)){
+                unset($fields[$key]);
+            }
+        }
+        return $fields;
     }
 }
