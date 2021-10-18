@@ -11,7 +11,7 @@ use vloop\entities\contracts\JsonApiEntities;
 use vloop\entities\contracts\JsonApiTypesOfEntities;
 use yii\helpers\VarDumper;
 
-class JsonApiOfEntities implements Entities
+class JsonApiOfEntities implements Entities, JsonApiEntities
 {
     private $origin;
     private $originType;

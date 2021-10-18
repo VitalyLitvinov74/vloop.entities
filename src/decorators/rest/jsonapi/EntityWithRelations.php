@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vloop\entities\decorators;
+namespace vloop\entities\decorators\rest\jsonapi;
 
 
 use vloop\entities\contracts\Entities;
@@ -10,13 +10,11 @@ use vloop\entities\contracts\Form;
 
 class EntityWithRelations implements Entity
 {
+    use Relation;
+
     private $origin;
     private $needleRelations;
 
-    /**
-     * @param Entity $origin
-     * @param array $needleRelations - поля которые которые превратятся в связи (если они есть) 
-     */
     public function __construct(Entity $origin, array $needleRelations) {
         $this->origin = $origin;
         $this->needleRelations = $needleRelations;
@@ -32,14 +30,18 @@ class EntityWithRelations implements Entity
      */
     public function printYourself(): array
     {
-        $originFields = $this->origin->printYourself();
-        foreach ($this->needleRelations as $needleRelation) {
-            if(array_key_exists($needleRelation, $originFields)){
-                $originFields['relationships'][] = $originFields[$needleRelation];
-                unset($originFields[$needleRelation]);
-            }
+        $originData = $this->origin->printYourself();
+        if(!array_key_exists('data', $originData)
+            and !array_key_exists('attributes', $originData['data'])){
+            return $originData;
         }
-        return $originFields;
+        $data = $originData['data'];
+        foreach ($this->needleRelations as $needleRelation){
+            $this->moveToRelation($data, $needleRelation);
+        }
+        return [
+            'data'=>$data
+        ];
     }
 
     /**
