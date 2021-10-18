@@ -6,7 +6,10 @@ namespace vloop\entities\contracts;
 
 interface Entity
 {
-    public function id(): int;
+    /**
+     * @return int|string - идентификатор сущности
+    */
+    public function id(): string;
 
     /**
      * @return array - печатает себя в виде массива
