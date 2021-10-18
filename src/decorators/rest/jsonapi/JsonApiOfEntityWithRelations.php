@@ -7,13 +7,13 @@ namespace vloop\entities\decorators\rest\jsonapi;
 use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
-use vloop\entities\contracts\JsonApiType;
+use vloop\entities\contracts\JsonApiEntity;
 
-class JsonApiOfRelationsOfEntity implements JsonApiType
+class JsonApiOfEntityWithRelations implements Entity, JsonApiEntity
 {
     private $origin;
 
-    public function __construct(JsonApiOfEntityType $origin) {
+    public function __construct(Entity $origin) {
         $this->origin = $origin;
     }
 

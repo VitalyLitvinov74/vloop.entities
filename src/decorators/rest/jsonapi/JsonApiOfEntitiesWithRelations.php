@@ -3,16 +3,17 @@
 
 namespace vloop\entities\decorators\rest\jsonapi;
 
+use vloop\entities\contracts\Entities;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
-use vloop\entities\contracts\JsonApiTypes;
+use vloop\entities\contracts\JsonApiEntities;
 
-class JsonApiRelationsOfEntities implements JsonApiTypes
+class JsonApiOfEntitiesWithRelations implements Entities, JsonApiEntities
 {
     private $origin;
     private $needleRelations;
 
-    public function __construct(JsonApiOfEntitiesTypes $origin, array $needleRelations) {
+    public function __construct(JsonApiEntities $origin, array $needleRelations) {
         $this->origin = $origin;
         $this->needleRelations = $needleRelations;
     }
@@ -36,7 +37,7 @@ class JsonApiRelationsOfEntities implements JsonApiTypes
     public function add(Form $form): Entity
     {
         $entity = $this->origin->add($form);
-        return new JsonApiOfRelationsOfEntity(
+        return new JsonApiOfEntityWithRelations(
             $entity
         );
     }

@@ -4,7 +4,7 @@
 namespace vloop\entities\contracts;
 
 
-interface JsonApiType extends Entity
+interface JsonApiEntity extends Entity
 {
 
 }
