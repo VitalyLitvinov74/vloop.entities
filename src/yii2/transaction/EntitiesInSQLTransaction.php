@@ -70,7 +70,7 @@ class EntitiesInSQLTransaction implements Entities
         try{
             $entity = $this->origin->add($form);
             $transaction->commit();
-            return $entity;
+            return new EntityInSQLTransaction($entity);
         }catch (NotValidatedFields $e){
             $transaction->rollBack();
             throw new NotValidatedFields($e->errors(), $e->getCode());
@@ -94,7 +94,7 @@ class EntitiesInSQLTransaction implements Entities
         try{
             $entity = $this->origin->entity($id);
             $transaction->commit();
-            return $entity;
+            return new EntityInSQLTransaction($entity);
         }catch (NotFoundEntity $e){
             $transaction->rollBack();
             throw new NotFoundEntity(
