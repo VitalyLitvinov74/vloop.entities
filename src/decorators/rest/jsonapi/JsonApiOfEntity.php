@@ -13,6 +13,8 @@ use vloop\entities\contracts\JsonApiTypeOfEntity;
 class JsonApiOfEntity implements Entity
 {
 
+    use JsonDataTrait;
+
     private $origin;
     private $originType;
     private $needleFields;
@@ -42,30 +44,15 @@ class JsonApiOfEntity implements Entity
         }
 
         return [
-            'data'=>[
-                "type" => $this->originType,
-                "id" => $this->id(),
-                "attributes" => $this->attributes()
-            ]
+            'data'=> $this->jsonDataFromArray(
+                $this->originType,
+                $origin->printYourself(),
+                $this->needleFields
+            )
         ];
     }
 
-    private function attributes(): array
-    {
-        $origArray = $this->origin->printYourself();
-        $attributes = [];
-        if ($this->needleFields) {
-            foreach ($this->needleFields as $needleField) {
-                if (array_key_exists($needleField, $origArray)) {
-                    $attributes[$needleField] = $origArray[$needleField];
-                }
-            }
-        } else {
-            $attributes = $origArray;
-        }
-        unset($attributes['id']);
-        return $attributes;
-    }
+
 
 
     /**
