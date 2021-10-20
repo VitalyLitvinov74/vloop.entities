@@ -16,9 +16,12 @@ class File implements Entity
         $this->path = $path;
     }
 
-    public function id(): int
+    /**
+     * @return string - имя файла.
+    */
+    public function id(): string
     {
-        return (int) pathinfo($this->path,PATHINFO_FILENAME);
+        return pathinfo($this->path,PATHINFO_BASENAME);
     }
 
     /**
