@@ -13,7 +13,7 @@ use vloop\entities\contracts\Form;
  * Class EntitiesWithI18NData
  * @package vloop\entities\yii2
  */
-class EntitiesWithI18NData implements Entities
+class I18nOfFieldsEntities implements Entities
 {
     private $origin;
 
@@ -29,7 +29,7 @@ class EntitiesWithI18NData implements Entities
         $origList = $this->origin->list();
         $newList = [];
         foreach ($origList as $key=>$entity){
-            $newList[$key] = new EntityWithI18nData($entity);
+            $newList[$key] = new I18nOfFieldsEntity($entity);
         }
         return $newList;
     }
@@ -40,7 +40,7 @@ class EntitiesWithI18NData implements Entities
     public function add(Form $form): Entity
     {
         $entity = $this->origin->add($form);
-        return new EntityWithI18nData($entity);
+        return new I18nOfFieldsEntity($entity);
     }
 
     /**

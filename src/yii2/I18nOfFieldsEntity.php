@@ -7,6 +7,7 @@ namespace vloop\entities\yii2;
 use vloop\entities\contracts\Entity;
 use vloop\entities\contracts\Form;
 use Yii;
+use yii\helpers\VarDumper;
 
 /**
  * Добавляет, к распечатке самго себя, карту атрибутов с переводом этих аттрибутов на русский язык.
@@ -19,7 +20,7 @@ use Yii;
  * Class EntityWithI18nData
  * @package vloop\entities\yii2
  */
-class EntityWithI18nData implements Entity
+class I18nOfFieldsEntity implements Entity
 {
     private $origin;
 
@@ -41,11 +42,11 @@ class EntityWithI18nData implements Entity
     public function printYourself(): array
     {
         $old = $this->origin->printYourself();
-        $mappedFields = [];
+        $mappedKeys = [];
         foreach ($old as $key=>$value){
-            $mappedFields[$key] = Yii::t('app', $key);
+            $mappedKeys[$key] = Yii::t('app', $key);
         }
-        $old['mappedFields'] = $mappedFields;
+        $old['mappedKeys'] = $mappedKeys;
         return $old;
     }
 
