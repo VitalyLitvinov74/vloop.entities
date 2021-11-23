@@ -10,7 +10,7 @@ namespace vloop\entities\exceptions;
 
 
 use vloop\entities\contracts\ExceptionsOfEntities;
-use yii\helpers\VarDumper;
+use Yii;
 
 abstract class AbstractException extends \Exception implements ExceptionsOfEntities
 {
@@ -24,6 +24,7 @@ abstract class AbstractException extends \Exception implements ExceptionsOfEntit
     public function __construct(array $errors, int $code) {
         $this->errors = $errors;
         parent::__construct('', $code);
+        Yii::$app->response->statusCode = $code;
     }
 
     public function errors(): array

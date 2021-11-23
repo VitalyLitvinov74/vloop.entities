@@ -11,6 +11,7 @@ use vloop\entities\exceptions\errors\ErrorsAsEntity;
 use vloop\entities\exceptions\NotFoundEntity;
 use vloop\entities\exceptions\NotSavedData;
 use vloop\entities\exceptions\NotValidatedFields;
+use Yii;
 use yii\helpers\VarDumper;
 
 class HandledExceptionsOfEntities implements Entities
