@@ -8,5 +8,5 @@ namespace vloop\entities\exceptions;
 */
 class NotValidatedFields extends AbstractException
 {
-
+    public function __construct(array $errors, int $code = 409) { parent::__construct($errors, $code); }
 }

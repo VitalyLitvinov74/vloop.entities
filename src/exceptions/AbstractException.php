@@ -10,6 +10,7 @@ namespace vloop\entities\exceptions;
 
 
 use vloop\entities\contracts\ExceptionsOfEntities;
+use yii\helpers\VarDumper;
 
 abstract class AbstractException extends \Exception implements ExceptionsOfEntities
 {
