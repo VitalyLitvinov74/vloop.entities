@@ -55,7 +55,9 @@ class HandledExceptionsOfEntities implements Entities
     public function add(Form $form): Entity
     {
         try{
-            return $this->origin->add($form);
+            return new HandledExceptionsOfEntity(
+                $this->origin->add($form)
+            );
         }catch (NotValidatedFields $e){
             return $this->errorsAsEntity($e->errors());
         }catch (NotSavedData $e){
@@ -70,7 +72,9 @@ class HandledExceptionsOfEntities implements Entities
     public function entity(int $id): Entity
     {
         try{
-            return $this->origin->entity($id);
+            return new HandledExceptionsOfEntity(
+                $this->origin->entity($id)
+            );
         }catch (NotFoundEntity $e){
             return $this->errorsAsEntity($e->errors());
         }catch (NotValidatedFields $e){
