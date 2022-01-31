@@ -14,6 +14,7 @@ class AbstractForm extends Model implements Form
 {
     //update tag
     protected $method;
+    public $formName = '';
 
     public function __construct($method = 'post', $config = [])
     {
@@ -42,9 +43,9 @@ class AbstractForm extends Model implements Form
     private function loadData(){
         $post = Yii::$app->request->post();
         $get = Yii::$app->request->get();
-        if ($this->method == 'post' and $this->load($post, '')) {
+        if ($this->method == 'post' and $this->load($post, $this->formName)) {
             return true;
-        } elseif ($this->method == 'get' and $this->load($get, '')) {
+        } elseif ($this->method == 'get' and $this->load($get, $this->formName)) {
             return true;
         }
         return false;
