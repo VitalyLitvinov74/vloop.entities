@@ -4,13 +4,13 @@
 namespace vloop\entities\yii2;
 
 
-use vloop\entities\contracts\Form;
+use vloop\entities\contracts\IForm;
 use vloop\entities\exceptions\NotValidatedFields;
 use Yii;
 use yii\base\Model;
 use yii\helpers\VarDumper;
 
-class AbstractForm extends Model implements Form
+abstract class AbstractForm extends Model implements IForm
 {
     //update tag
     protected $method;
