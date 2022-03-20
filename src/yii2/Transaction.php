@@ -5,6 +5,7 @@ namespace vloop\entities\yii2;
 
 
 use Throwable;
+use Yii;
 
 class Transaction
 {
@@ -15,7 +16,7 @@ class Transaction
      * Transaction constructor.
      * @param array $needleCommitTables - [ActiveRecord1::class, ActiveRecord2::class]
      */
-    public function __construct(array $needleCommitTables)
+    public function __construct(array $needleCommitTables = [])
     {
         $this->needleTables = $needleCommitTables;
     }
@@ -25,7 +26,8 @@ class Transaction
      * @return mixed
      * @throws Throwable
      */
-    public function begin(callable $callback){
+    public function begin(callable $callback)
+    {
         $beginedTransactions = $this->beginedTransactions();
         try {
             $result = call_user_func($callback);
@@ -43,8 +45,12 @@ class Transaction
     private function beginedTransactions(): array
     {
         $transctions = [];
-        foreach ($this->needleTables as $table) {
-            $transctions[] = $table::getDb()->beginTransaction();
+        if (empty($this->needleTables)) {
+            $transctions[] = Yii::$app->getDb()->beginTransaction();
+        } else {
+            foreach ($this->needleTables as $table) {
+                $transctions[] = $table::getDb()->beginTransaction();
+            }
         }
         return $transctions;
     }
@@ -63,7 +69,7 @@ class Transaction
      * @param \yii\db\Transaction[] $transactions
      * @throws \yii\db\Exception
      */
-    private function commitTransactions(array $transactions):void
+    private function commitTransactions(array $transactions): void
     {
         foreach ($transactions as $transaction) {
             $transaction->commit();
