@@ -1,9 +1,10 @@
 <?php
 
 
-namespace vloop\entities\yii2\criteria;
+namespace vloop\entities\yii2\queries\decorators;
 
 
+use vloop\entities\yii2\queries\IImprovedQuery;
 use yii\data\Sort;
 use yii\db\Query;
 

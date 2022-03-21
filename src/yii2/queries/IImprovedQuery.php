@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vloop\entities\yii2\criteria;
+namespace vloop\entities\yii2\queries;
 
 
 use yii\db\Query;

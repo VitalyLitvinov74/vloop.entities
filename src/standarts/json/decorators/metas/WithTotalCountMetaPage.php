@@ -4,7 +4,7 @@
 namespace vloop\entities\standarts\json\decorators\meta;
 
 
-use vloop\entities\yii2\criteria\IImprovedQuery;
+use vloop\entities\yii2\queries\IImprovedQuery;
 
 class WithTotalCountMetaPage implements IMeta
 {
