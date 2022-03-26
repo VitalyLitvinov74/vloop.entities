@@ -75,9 +75,7 @@ class JsonStandart implements IJsonStandart
         return [
             'id' => $id,
             'type' => $type,
-            'attributes' => [
-                $printedObject
-            ]
+            'attributes' => $printedObject
         ];
     }
 }
