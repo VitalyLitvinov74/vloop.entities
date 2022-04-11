@@ -9,7 +9,7 @@
 namespace vloop\entities\exceptions;
 
 
-use vloop\entities\contracts\ExceptionsOfEntities;
+use vloop\entities\contracts\WeExceptions;
 
 class NotSavedData extends AbstractException
 {

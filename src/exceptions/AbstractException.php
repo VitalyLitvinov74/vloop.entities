@@ -9,10 +9,10 @@
 namespace vloop\entities\exceptions;
 
 
-use vloop\entities\contracts\ExceptionsOfEntities;
+use vloop\entities\contracts\WeExceptions;
 use Yii;
 
-abstract class AbstractException extends \Exception implements ExceptionsOfEntities
+abstract class AbstractException extends \Exception implements WeExceptions
 {
     protected $errors;
 

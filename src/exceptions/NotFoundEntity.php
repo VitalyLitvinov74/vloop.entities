@@ -6,7 +6,7 @@ namespace vloop\entities\exceptions;
 
 use Throwable;
 use vloop\entities\contracts\ExceptionInterface;
-use vloop\entities\contracts\ExceptionsOfEntities;
+use vloop\entities\contracts\WeExceptions;
 
 class NotFoundEntity extends AbstractException
 {
