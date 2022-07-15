@@ -15,6 +15,7 @@ abstract class AbstractForm extends Model implements IForm
     //update tag
     protected $method;
     public $formName = '';
+    private $_fields = false;
 
     public function __construct($method = 'post', $config = [])
     {
@@ -28,7 +29,7 @@ abstract class AbstractForm extends Model implements IForm
      */
     public function validatedFields(): array
     {
-        static $fields = false;
+        $fields = $this->_fields;
         if(is_array($fields)){
             return $fields;
         }
