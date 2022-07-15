@@ -12,7 +12,6 @@ use yii\helpers\VarDumper;
 
 abstract class AbstractForm extends Model implements IForm
 {
-    //update tag
     protected $method;
     public $formName = '';
     private $_fields = false;
@@ -36,6 +35,7 @@ abstract class AbstractForm extends Model implements IForm
         $this->loadData();
         if ($this->validate()) {
             $fields = $this->unsetNull($this->getAttributes());
+            $this->_fields = $fields;
             return $fields;
         }
         throw new NotValidatedFields($this->getErrors(), 400);
