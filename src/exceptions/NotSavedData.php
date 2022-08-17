@@ -13,6 +13,9 @@ use vloop\entities\contracts\WeExceptions;
 
 class NotSavedData extends AbstractException
 {
-
+    public function __construct(array $errors, int $code, string $message = 'Not saved data')
+    {
+        parent::__construct($errors, $code, $message);
+    }
 
 }

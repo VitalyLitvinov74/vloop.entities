@@ -38,7 +38,7 @@ abstract class AbstractForm extends Model implements IForm
             $this->_fields = $fields;
             return $fields;
         }
-        throw new NotValidatedFields($this->getErrors(), 400);
+        throw new NotValidatedFields($this->getErrors(), 409);
     }
 
     private function loadData(){

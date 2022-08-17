@@ -21,9 +21,9 @@ abstract class AbstractException extends \Exception implements WeExceptions
      * @param array $errors - массив ошибок.
      * @param int $code - код ошибки.
      */
-    public function __construct(array $errors, int $code) {
+    public function __construct(array $errors, int $code, string $message = '') {
         $this->errors = $errors;
-        parent::__construct('', $code);
+        parent::__construct($message, $code);
         Yii::$app->response->statusCode = $code;
     }
 
