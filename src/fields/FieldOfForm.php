@@ -3,7 +3,6 @@
 
 namespace vloop\entities\fields;
 
-
 use vloop\entities\contracts\IField;
 use vloop\entities\contracts\IForm;
 use vloop\entities\exceptions\NotValidatedFields;
@@ -12,6 +11,7 @@ class FieldOfForm implements IField
 {
     private $form;
     private $needleField;
+    private $_value;
 
     public function __construct(IForm $form, string $needleField)
     {
@@ -21,22 +21,22 @@ class FieldOfForm implements IField
 
     public function asInt(): int
     {
-        return (int) $this->value();
+        return $this->value()->asInt();
     }
 
     public function asFloat(): float
     {
-        return (float) $this->value();
+        return $this->value()->asFloat();
     }
 
     public function asBool(): bool
     {
-        return (bool) $this->value();
+        return $this->value()->asBool();
     }
 
     public function asString(): string
     {
-        return (string) $this->value();
+        return $this->value()->asString();
     }
 
     /**
@@ -44,7 +44,16 @@ class FieldOfForm implements IField
      * @throws NotValidatedFields
      */
     private function value(){
-        $fields = $this->form->validatedFields();
-        return $fields[$this->needleField];
+        if(!is_null($this->_value)){
+            return $this->_value;
+        }
+        $validatedFields = $this->form->validatedFields();
+        if(isset($validatedFields[$this->needleField])){
+            $this->_value = new Field(
+                $validatedFields[$this->needleField]
+            );
+            return $this->_value;
+        }
+        throw new \Exception('Field not exist', 400);
     }
 }
