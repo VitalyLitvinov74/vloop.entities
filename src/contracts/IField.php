@@ -1,20 +1,13 @@
 <?php
-
-
 namespace vloop\entities\contracts;
 
-
-use vloop\PrintYourSelf\PrintYourSelf;
-
-interface IField extends PrintYourSelf
+interface IField
 {
-    /**
-     * @return string - возвращает значение поля
-     */
-    public function value(): string;
+    public function asInt(): int;
 
-    /**
-     * @return array - печатает само себя
-     */
-    public function printYourSelf(): array;
+    public function asFloat(): float;
+
+    public function asBool(): bool;
+
+    public function asString(): string ;
 }

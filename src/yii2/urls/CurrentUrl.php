@@ -9,15 +9,28 @@ use Yii;
 
 class CurrentUrl implements IField
 {
-    public function printYourSelf(): array
-    {
-        return [
-            'currentUrl' => $this->value()
-        ];
-    }
-
-    public function value(): string
+    private function value(): string
     {
         return '/' . Yii::$app->requestedRoute;
+    }
+
+    public function asInt(): int
+    {
+        return (int) $this->value();
+    }
+
+    public function asFloat(): float
+    {
+        return (float) $this->value();
+    }
+
+    public function asBool(): bool
+    {
+        return (bool) $this->value();
+    }
+
+    public function asString(): string
+    {
+        return (bool) $this->value();
     }
 }

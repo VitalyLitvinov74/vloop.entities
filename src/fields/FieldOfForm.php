@@ -19,24 +19,32 @@ class FieldOfForm implements IField
         $this->needleField = $needleField;
     }
 
-    /**
-     * @return string
-     * @throws NotValidatedFields
-     */
-    public function value(): string
+    public function asInt(): int
     {
-        $fields = $this->form->validatedFields();
-        return $fields[$this->needleField];
+        return (int) $this->value();
+    }
+
+    public function asFloat(): float
+    {
+        return (float) $this->value();
+    }
+
+    public function asBool(): bool
+    {
+        return (bool) $this->value();
+    }
+
+    public function asString(): string
+    {
+        return (string) $this->value();
     }
 
     /**
-     * @return array
+     * @return mixed
      * @throws NotValidatedFields
      */
-    public function printYourSelf(): array
-    {
-        return [
-            $this->needleField => $this->value()
-        ];
+    private function value(){
+        $fields = $this->form->validatedFields();
+        return $fields[$this->needleField];
     }
 }

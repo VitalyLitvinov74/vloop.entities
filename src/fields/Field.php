@@ -8,24 +8,38 @@ use vloop\entities\contracts\IField;
 
 class Field implements IField
 {
-    private $key;
     private $value;
 
-    public function __construct(string $key, string $value)
+    public function __construct($value)
     {
-        $this->key = $key;
         $this->value = $value;
     }
 
-    public function value(): string
+    public function asInt(): int
     {
-        return $this->value;
+        return (int) $this->value;
     }
 
-    public function printYourSelf(): array
+    public function asFloat(): float
     {
-        return [
-            $this->key => $this->value
-        ];
+        return (float) $this->value;
+    }
+
+    public function asBool(): bool
+    {
+        return (bool) $this->value;
+    }
+
+    public function asString(): string
+    {
+        return (string) $this->value;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function value()
+    {
+        return $this->value;
     }
 }
